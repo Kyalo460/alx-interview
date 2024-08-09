@@ -1,4 +1,9 @@
+#!/usr/bin/python3
+"""Returns a pascal's triangle inform of a matrix."""
+
+
 def pascal_triangle(n):
+    """Returns a matrix if n > 0."""
     arr = []
 
     if n <= 0:
