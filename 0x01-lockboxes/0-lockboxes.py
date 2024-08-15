@@ -7,17 +7,4 @@ def canUnlockAll(boxes):
     keys = set()
 
     for index in range(len(boxes)):
-        for inner_index in range(len(boxes[index])):
-            if (boxes[index][inner_index] >= len(boxes)):
-                continue
-            elif (boxes[index][inner_index] == 0):
-                continue
-            elif (boxes[index][inner_index] == index):
-                continue
-            else:
-                keys.add(boxes[index][inner_index])
 
-    if (len(keys) == len(boxes) - 1):
-        return True
-    else:
-        return False
