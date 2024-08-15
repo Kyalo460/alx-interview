@@ -8,9 +8,9 @@ def canUnlockAll(boxes):
     keys = set()
 
     # print(boxes)
-    print(f"range is {len(boxes)}")
+    # print(f"range is {len(boxes)}")
     for index in range(len(boxes)):
-    # print(f"range is {len(boxes[index])}")
+        # print(f"range is {len(boxes[index])}")
         for inner_index in range(len(boxes[index])):
             if (boxes[index][inner_index] >= len(boxes)):
                 continue
@@ -19,7 +19,7 @@ def canUnlockAll(boxes):
             else:
                 keys.add(boxes[index][inner_index])
 
-    print(f"Keys are {keys}")
+    # print(f"Keys are {keys}")
     if (len(keys) == len(boxes) - 1):
         return True
     else:
