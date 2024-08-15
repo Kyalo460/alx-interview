@@ -1,14 +1,10 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """A method that determines if all the boxes can be opened.
-Return True if all boxes can be opened, else return False.
-Return True if all boxes can be opened, else return False.
 """
 
 
 def canUnlockAll(boxes):
     """Return True if all boxes can be opened, else return False.
-    Return True if all boxes can be opened, else return False.
-    Return True if all boxes can be opened, else return False.
     """
     keys = set()
 
