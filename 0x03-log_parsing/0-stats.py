@@ -4,6 +4,16 @@ the file size and status codes (and their occurences)
 """
 import sys
 import re
+import signal
+
+def handle_sigint(signum, frame):
+    print("File size:", total_size)
+
+    ordered_dict = dict(sorted(status_codes_dict.items()))
+    for key, value in ordered_dict.items():
+        print(f"{key}: {value}")
+
+signal.signal(signal.SIGINT, handle_sigint)
 
 count = 0
 cap = 10
