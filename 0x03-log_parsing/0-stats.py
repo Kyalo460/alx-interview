@@ -37,5 +37,6 @@ for line in sys.stdin:
         cap += 10
         print("File size:", total_size)
 
-        for key, value in status_codes_dict.items():
+        ordered_dict = dict(sorted(status_codes_dict.items()))
+        for key, value in ordered_dict.items():
             print(f"{key}: {value}")
