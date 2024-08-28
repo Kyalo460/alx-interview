@@ -7,6 +7,8 @@ import re
 import signal
 
 def handle_sigint(signum, frame):
+    """This is a SIGINT handler
+    """
     print("File size:", total_size)
     ordered_dict = dict(sorted(status_codes_dict.items()))
     for key, value in ordered_dict.items():
