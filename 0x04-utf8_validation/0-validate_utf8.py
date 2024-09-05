@@ -6,6 +6,8 @@ represents a valid UTF-8 encoding.
 
 def validUTF8(data):
     """Returns True if data is a valid UTF-8 encoding, else return False."""
+    if len(data) == 0:
+        return False
     for byte in data:
         if (byte > 255):
             return False
