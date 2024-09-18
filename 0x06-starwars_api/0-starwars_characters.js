@@ -25,42 +25,26 @@
 //     console.log(error);
 //   });
 
-const request = require('request');
+import fetch from 'node-fetch';
 
-const filmId = process.argv[2];
+const url = `https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`;
 
-if (!filmId) {
-  console.error('Please provide a film ID as a command-line argument.');
-  process.exit(1);
-}
-
-const url = `https://swapi-api.alx-tools.com/api/films/${filmId}`;
-
-// Function to make a request and parse JSON
-const fetchJson = (url, callback) => {
-  request({ url, json: true }, (error, response, body) => {
-    if (error) {
-      return callback(error);
-    }
-    callback(null, body);
-  });
+const fetchJson = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  return response.json();
 };
 
-// Fetch film data
-fetchJson(url, (error, filmData) => {
-  if (error) {
-    console.error('Error fetching film data:', error);
-    return;
-  }
-
-  // Fetch character data
-  filmData.characters.forEach(characterUrl => {
-    fetchJson(characterUrl, (error, characterData) => {
-      if (error) {
-        console.error('Error fetching character data:', error);
-        return;
-      }
+const main = async () => {
+  try {
+    const filmData = await fetchJson(url);
+    for (const characterUrl of filmData.characters) {
+      const characterData = await fetchJson(characterUrl);
       console.log(characterData.name);
-    });
-  });
-});
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+main();
