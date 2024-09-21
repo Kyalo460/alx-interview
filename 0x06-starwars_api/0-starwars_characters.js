@@ -1,58 +1,41 @@
 #!/usr/bin/node
 
-import fetch from 'node-fetch';
+const request = require('request');
 
-const url = `https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`;
-fetch(url)
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    data.characters.forEach(character => {
-      fetch(character)
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          console.log(data.name);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
-  })
-  .catch(error => {
-    console.log(error);
+const filmId = process.argv[2];
+
+if (!filmId) {
+  console.error('Please provide a film ID as a command-line argument.');
+  process.exit(1);
+}
+
+const url = `https://swapi-api.alx-tools.com/api/films/${filmId}`;
+
+// Function to make a request and parse JSON
+const fetchJson = (url, callback) => {
+  request({ url, json: true }, (error, response, body) => {
+    if (error) {
+      return callback(error);
+    }
+    callback(null, body);
   });
+};
 
-// import fetch from 'node-fetch';
+// Fetch film data
+fetchJson(url, (error, filmData) => {
+  if (error) {
+    console.error('Error fetching film data:', error);
+    return;
+  }
 
-// const url = `https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`;
-
-// const fetchJson = async (url) => {
-//   const response = await fetch(url);
-//   if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-//   return response.json();
-// };
-// let characters = "";
-// let count = 0;
-// const main = async () => {
-//   try {
-//     const filmData = await fetchJson(url);
-//     for (const characterUrl of filmData.characters) {
-//       const characterData = await fetchJson(characterUrl);
-//       // console.log(characterData.name);
-//       if (count === 0) {
-//         characters += characterData.name
-//         count += 1;
-//       } else {
-//         characters += `\n${characterData.name}`
-//       }
-//     }
-//     console.log(characters);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// };
-
-// main();
+  // Fetch character data
+  filmData.characters.forEach(characterUrl => {
+    fetchJson(characterUrl, (error, characterData) => {
+      if (error) {
+        console.error('Error fetching character data:', error);
+        return;
+      }
+      console.log(characterData.name);
+    });
+  });
+});
