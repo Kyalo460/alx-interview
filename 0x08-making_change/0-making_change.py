@@ -13,11 +13,6 @@ def makeChange(coins, total):
     if total == 0:
         return 0
 
-    coins_total = 0
-
-    for coin in coins:
-        coins_total += coin
-
     coins.sort()
     n = len(coins)
     i = n - 1
