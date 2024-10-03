@@ -23,8 +23,8 @@ def makeChange(coins, total):
     i = n - 1
     count = 0
 
-    while(i >= 0) :
-        while(total >= coins[i]):
+    while (i >= 0):
+        while (total >= coins[i]):
             total -= coins[i]
             count += 1
 
