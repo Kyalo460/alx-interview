@@ -10,7 +10,7 @@ def makeChange(coins, total):
             0 if total is 0
             -1 if total can't be met
     """
-    if total == 0:
+    if total < 1:
         return 0
 
     coins.sort()
