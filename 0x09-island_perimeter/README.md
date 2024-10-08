@@ -1,0 +1,1 @@
+Returns the perimeter of an island.
