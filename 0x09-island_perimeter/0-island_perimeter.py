@@ -14,7 +14,7 @@ def island_perimeter(grid):
                 if grid[i][j - 1]:
                     if grid[i][j - 1] == 1:
                         sides -= 1
-                        
+
                 # check grid above
                 if grid[i - 1]:
                     if grid[i - 1][j] == 1:
@@ -33,4 +33,4 @@ def island_perimeter(grid):
                 # add sides to perimeter
                 perimeter += sides
 
-    return perimeter    
+    return perimeter
